@@ -36,9 +36,8 @@ fun main() {
         }
     }
 
-    val additive = Modpack("additive")
     val adrenaline = Modpack("adrenaline")
-    var selectedPack = additive
+    var selectedPack = adrenaline
 
     val installDestChooser = JFileChooser(PackInstaller.DOT_MINECRAFT.toString()).apply {
         fileSelectionMode = JFileChooser.DIRECTORIES_ONLY
@@ -102,18 +101,6 @@ fun main() {
         setupMinecraftVersions()
 
         includeUnsupportedMinecraft.addActionListener { setupMinecraftVersions() }
-
-        val includeFeatures = JCheckBox(I18N.getString("include.non.performance.features")).apply {
-            isSelected = true
-            addActionListener {
-                selectedPack = if (isSelected) additive else adrenaline
-                title = selectedPack.windowTitle
-                iconImage = selectedPack.image
-                iconLabel.icon = ImageIcon(selectedPack.image)
-
-                setupMinecraftVersions()
-            }
-        }
 
         val installProgress = JProgressBar().apply {
             isStringPainted = true
@@ -186,7 +173,6 @@ fun main() {
         }
 
         enableOptions = {
-            includeFeatures.isEnabled = it
             minecraftVersion.isEnabled = it
             includeUnsupportedMinecraft.isEnabled = it
             packVersion.isEnabled = it
@@ -204,8 +190,6 @@ fun main() {
                 border = BorderFactory.createEmptyBorder(5, 5, 5, 5)
                 add(iconLabel, BorderLayout.PAGE_START)
             })
-            add(Box.createVerticalStrut(15))
-            add(includeFeatures.withLabel())
             add(Box.createVerticalStrut(15))
             add(minecraftVersion.withLabel(I18N.getString("minecraft.version")))
             add(Box.createVerticalStrut(5))
