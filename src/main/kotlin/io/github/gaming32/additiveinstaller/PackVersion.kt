@@ -1,4 +1,4 @@
-package io.github.gaming32.additiveinstaller
+package io.github.amturtle.tppinstaller
 
 import com.google.gson.JsonObject
 import java.nio.file.Path

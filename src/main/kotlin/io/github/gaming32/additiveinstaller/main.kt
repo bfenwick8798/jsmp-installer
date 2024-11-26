@@ -1,4 +1,4 @@
-package io.github.gaming32.additiveinstaller
+package io.github.amturtle.tppinstaller
 
 import com.formdev.flatlaf.FlatDarkLaf
 import com.formdev.flatlaf.FlatLightLaf
@@ -20,7 +20,7 @@ const val VERSION = "<<VERSION>>"
 val I18N = ResourceBundle.getBundle("i18n/lang", Locale.getDefault())!!
 
 fun main() {
-    logger.info { "Additive Installer $VERSION" }
+    logger.info { "TPP Installer $VERSION" }
 
     if (isDarkMode()) {
         if (operatingSystem == OperatingSystem.MACOS) {
@@ -36,8 +36,8 @@ fun main() {
         }
     }
 
-    val adrenaline = Modpack("adrenaline")
-    var selectedPack = adrenaline
+    val tpp = Modpack("tpp")
+    var selectedPack = tpp
 
     val installDestChooser = JFileChooser(PackInstaller.DOT_MINECRAFT.toString()).apply {
         fileSelectionMode = JFileChooser.DIRECTORIES_ONLY

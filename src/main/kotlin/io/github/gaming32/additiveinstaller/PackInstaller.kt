@@ -1,4 +1,4 @@
-package io.github.gaming32.additiveinstaller
+package io.github.amturtle.tppinstaller
 
 import com.google.common.jimfs.Configuration
 import com.google.common.jimfs.Jimfs

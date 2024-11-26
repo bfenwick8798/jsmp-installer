@@ -1,4 +1,4 @@
-package io.github.gaming32.additiveinstaller
+package io.github.amturtle.tppinstaller
 
 interface ProgressHandler {
     fun prepareNewTaskSet(prepareMessage: String)

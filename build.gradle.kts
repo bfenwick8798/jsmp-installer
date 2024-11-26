@@ -7,11 +7,11 @@ plugins {
     id("de.undercouch.download") version "5.6.0"
 }
 
-group = "io.github.gaming32"
+group = "io.github.amturtle"
 version = "1.0.3"
 
 application {
-    mainClass.set("io.github.gaming32.additiveinstaller.MainKt")
+    mainClass.set("io.github.amturtle.tppinstaller.MainKt")
 }
 
 repositories {

@@ -1,4 +1,4 @@
-package io.github.gaming32.additiveinstaller
+package io.github.amturtle.tppinstaller
 
 import io.github.oshai.kotlinlogging.KotlinLogging
 import javax.swing.JProgressBar
