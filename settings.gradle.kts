@@ -1,3 +1,3 @@
 
-rootProject.name = "TPP-installer"
+rootProject.name = "tpp-installer"
 

@@ -10,19 +10,23 @@ class PackVersion(val modpack: Modpack, val data: JsonObject) {
 
     init {
         val versionNumber = data["version_number"].asString
-        loader = if ('-' in versionNumber && '+' !in versionNumber) {
+        if ('-' in versionNumber && '+' !in versionNumber) {
             packVersion = versionNumber.substringBefore('-')
             gameVersion = versionNumber.substringAfterLast('-')
-            if (versionNumber.count { it == '-' } > 1) {
-                versionNumber.substringAfter('-').substringBeforeLast('-')
+            loader = if (versionNumber.count { it == '-' } > 1) {
+                Loader.valueOf(versionNumber.substringAfter('-').substringBeforeLast('-').uppercase())
             } else {
-                "FABRIC"
+                Loader.FABRIC
             }
         } else {
             packVersion = versionNumber.substringBefore('+')
             gameVersion = versionNumber.substringAfter('+').substringBeforeLast('.')
-            versionNumber.substringAfterLast('.')
-        }.uppercase().let(Loader::valueOf)
+            loader = try {
+                Loader.valueOf(versionNumber.substringAfterLast('.').uppercase())
+            } catch (e: IllegalArgumentException) {
+                Loader.FABRIC // Default to FABRIC if loader is not recognized
+            }
+        }
     }
 
     val launcherFolderPath = "${modpack.id}/$packVersion-$gameVersion-$loader"
