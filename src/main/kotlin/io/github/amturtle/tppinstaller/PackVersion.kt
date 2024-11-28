@@ -9,23 +9,17 @@ class PackVersion(val modpack: Modpack, val data: JsonObject) {
     val loader: Loader
 
     init {
-        val versionNumber = data["version_number"].asString
-        if ('-' in versionNumber && '+' !in versionNumber) {
-            packVersion = versionNumber.substringBefore('-')
-            gameVersion = versionNumber.substringAfterLast('-')
-            loader = if (versionNumber.count { it == '-' } > 1) {
-                Loader.valueOf(versionNumber.substringAfter('-').substringBeforeLast('-').uppercase())
-            } else {
-                Loader.FABRIC
-            }
-        } else {
-            packVersion = versionNumber.substringBefore('+')
-            gameVersion = versionNumber.substringAfter('+').substringBeforeLast('.')
-            loader = try {
-                Loader.valueOf(versionNumber.substringAfterLast('.').uppercase())
-            } catch (e: IllegalArgumentException) {
-                Loader.FABRIC // Default to FABRIC if loader is not recognized
-            }
+        packVersion = data["version_number"].asString
+        
+        // Get game version from game_versions array, using the first one
+        gameVersion = data["game_versions"].asJsonArray.first().asString
+        
+        // Get loader from loaders array, defaulting to FABRIC if not found
+        loader = try {
+            val loaderStr = data["loaders"].asJsonArray.first().asString
+            Loader.valueOf(loaderStr.uppercase())
+        } catch (e: Exception) {
+            Loader.FABRIC // Default to FABRIC if loader is not found or not recognized
         }
     }
 
