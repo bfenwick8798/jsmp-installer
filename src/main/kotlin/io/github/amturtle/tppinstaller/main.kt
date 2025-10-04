@@ -36,7 +36,7 @@ fun main() {
         }
     }
 
-    val tpp = Modpack("tpp")
+    val tpp = Modpack("joesmp")
     var selectedPack = tpp
 
     val installDestChooser = JFileChooser(PackInstaller.DOT_MINECRAFT.toString()).apply {
